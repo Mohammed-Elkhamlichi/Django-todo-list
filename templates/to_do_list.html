@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="container mt-5">
+        <form action="" method="POST" class="bg-info col-md-8 m-auto rounded border">
+            <h1 class="bg-success border mt-1 p-4 mb-5 display-4 font-weight-bold rounded text-center">MEM To Do List </h1>
+            
+            {% csrf_token %}
+            <div class="row m-auto">
+                {{form.title}}
+                <button class="btn btn-success col-md-2 border rounded font-weight-bold">Save</button>
+            </div>
+            {% for list in lists %}
+                <div class="btn btn-success col-md-12 text-left mt-3 mb-3 border ">
+                    {% if list.completed %}
+                        <h4 class="float-left"><del>{{list.title}}</del><small class="text-dark font-weight-bold"> (completed)</small></h4>
+                    {% else %}
+                        <h4 class="float-left">{{list.title}}<small class="text-dark font-weight-bold"> (not completed yet)</small></h4>
+                    {% endif %}
+                    <div class="float-right">
+                        <a class="btn btn-info border rounded font-weight-bold" href="{% url 'update' list.id list.title  %}">Update</a>
+                        <a class="btn btn-danger border rounded font-weight-bold" href="{% url 'delete' list.id list.title %}">Delete</a>
+                    </div>
+                </div>
+            {% empty %}
+                <h3 class="text-center p-3">No Lists Exists For This Moment</h3>
+            {% endfor %}
+        </form>
+    </div>
+{% endblock content %}

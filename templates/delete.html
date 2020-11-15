@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="container mt-5">
+        <form action="" method="POST" class="bg-info col-md-8 m-auto rounded border pb-5">
+            {% csrf_token %}
+            <h1 class="bg-success border mt-1 p-4 mb-5 display-4 font-weight-bold rounded text-center">MEM To Do List </h1>
+            <h3 class="text-center ">
+                are you sure you want to remove <span class="text-light font-weight-bold">{{task.title}}</span> task??
+            </h3>
+            <div class="text-center">
+                <a href="{% url 'to_do_list' %}" class="btn btn-success col-md-3 mt-3 p-3 border rounded font-weight-bold">Cancel</a>
+                <button class="btn btn-danger col-md-3 mt-3 p-3 border rounded font-weight-bold">Delete</button>
+                
+            </div>
+        </form>
+    </div>
+{% endblock content %}
